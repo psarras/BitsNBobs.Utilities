@@ -1,0 +1,15 @@
+{
+  "name": "stam.bitsnbobs.utilities",
+  "displayName": "Bits n Bobs: Utilities",
+  "version": "1.0.0",
+  "unity": "2019.1",
+  "keywords": [
+    "utilities"
+  ],
+  "description": "A few usefull scripts I picked-up along my journey in Unity",
+  "author": {
+    "name": "Stamatios Psarras",
+    "url": "http://github.com"
+  },
+  "type": "library"
+}
