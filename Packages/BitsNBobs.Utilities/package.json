@@ -11,5 +11,6 @@
     "name": "Stamatios Psarras",
     "url": "http://github.com"
   },
-  "type": "library"
+  "type": "library",
+  "hideInEditor": false
 }

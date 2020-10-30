@@ -1,0 +1,16 @@
+{
+    "name": "BitsNBobs.Utilities.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a14676df94095f0438c039691d627655"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
