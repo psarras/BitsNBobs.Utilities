@@ -34,9 +34,9 @@ namespace BitsNBobs.Patterns.Factory
 
         private static void InstantiateConstructors()
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var baseType = typeof(IObject<O>);
-            var allTypes = assembly.GetTypes();
+            var allTypes = assemblies.Select(x => x.GetTypes()).SelectMany(x => x);
             var types = allTypes.Where(x =>
                 x != baseType &&
                 baseType.IsAssignableFrom(x) &&
