@@ -57,7 +57,12 @@ namespace BitsNBobs.Manage
         {
             var keys = new K[Keys.Count];
             Keys.CopyTo(keys, 0);
-            Index = keys.ToList().IndexOf(key);
+            var index = keys.ToList().IndexOf(key);
+            
+            if (index == -1) 
+                return;
+            
+            Index = index;
             Set(Index);
         }
 
@@ -80,7 +85,8 @@ namespace BitsNBobs.Manage
 
         public T Get(int index)
         {
-            return (T)this[GetKey(index)];
+            var o = this[GetKey(index)];
+            return (T)o;
         }
 
         public T Get(K key)

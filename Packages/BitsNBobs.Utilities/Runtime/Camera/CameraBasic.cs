@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
+    using Color = System.Drawing.Color;
 
-namespace BitsNBobs.Utilities.Cameras
+    namespace BitsNBobs.Cameras
 {
     public class CameraBasic : MonoBehaviour
     {
@@ -22,17 +23,22 @@ namespace BitsNBobs.Utilities.Cameras
         private Vector3 mousePositionPrevious = Vector3.zero;
         private Vector3 targetPan;
         private Vector3 tRot;
-        [HideInInspector]
         public Vector3 target;
 
         private float OrthoTarget;
         private float maxPan = 100f;
-        private Quaternion desiredRotation;
+        public Quaternion desiredRotation { get; private set; }
         private bool needUpdate = false;
 
         public float speedOrbit = .25f;
 
         private new Camera cameraRef;
+        public Camera cam;
+
+        private void Awake()
+        {
+            cam = GetComponent<Camera>();
+        }
 
         public void Start()
         {
@@ -40,6 +46,12 @@ namespace BitsNBobs.Utilities.Cameras
             cameraRef = GetComponent<Camera>();
             target = transform.position + transform.forward * distance;
 
+        }
+
+        public void OnDrawGizmos()
+        {
+            Gizmos.color = UnityEngine.Color.red;
+            Gizmos.DrawCube(target, Vector3.one * 2);
         }
 
         public void Update()
@@ -51,9 +63,8 @@ namespace BitsNBobs.Utilities.Cameras
                 {
                     speedModifier = 500f;
 
-                    var ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hitInfo;
-                    bool hit = Physics.Raycast(ray, out hitInfo);
+                    var ray = cam.ScreenPointToRay(Input.mousePosition);
+                    var hit = Physics.Raycast(ray, out var hitInfo);
                     if (hit)
                     {
                         var dist = Vector3.Distance(transform.position, hitInfo.point);
@@ -245,6 +256,15 @@ namespace BitsNBobs.Utilities.Cameras
             copy.size = size;
 
             return copy.Contains(new Vector2(m.x, m.y));
+        }
+
+        public void MatchCamera(CameraBasic cameraBasic)
+        {
+            this.target = cameraBasic.target;
+            transform.position = cameraBasic.transform.position;
+            transform.rotation = cameraBasic.transform.rotation;
+            distance = cameraBasic.distance;
+            desiredRotation = cameraBasic.desiredRotation;
         }
     }
 }

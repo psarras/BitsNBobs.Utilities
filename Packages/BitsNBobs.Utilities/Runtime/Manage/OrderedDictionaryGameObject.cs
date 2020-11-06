@@ -5,12 +5,17 @@ namespace BitsNBobs.Manage
 {
     public class OrderedDictionaryGameObject : OrderedDictionaryManager<string, GameObject>
     {
-        public void Enable()
+        public virtual void Enable()
         {
             Get().SetActive(true);
         }
 
         public void Disable()
+        {
+            Get().SetActive(false);
+        }
+
+        public void DisableAll()
         {
             foreach (var item in Values)
             {
@@ -26,29 +31,29 @@ namespace BitsNBobs.Manage
 
         public override void Next()
         {
-            base.Next();
             Disable();
+            base.Next();
             Enable();
         }
 
         public override void Back()
         {
-            base.Back();
             Disable();
+            base.Back();
             Enable();
         }
 
         public override void Set(int index)
         {
-            base.Set(index);
             Disable();
+            base.Set(index);
             Enable();
         }
         
         public override void Set(string key)
         {
-            base.Set(key);
             Disable();
+            base.Set(key);
             Enable();
         }
         
