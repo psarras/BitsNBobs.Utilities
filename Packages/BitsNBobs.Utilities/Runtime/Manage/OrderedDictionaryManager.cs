@@ -88,6 +88,14 @@ namespace BitsNBobs.Manage
             return keys[index];
         }
 
+        public K[] GetKeys()
+        {
+            var keys = new K[Keys.Count];
+            Keys.CopyTo(keys, 0);
+            return keys;
+        }
+        
+
         public T Get(int index)
         {
             var o = this[GetKey(index)];
