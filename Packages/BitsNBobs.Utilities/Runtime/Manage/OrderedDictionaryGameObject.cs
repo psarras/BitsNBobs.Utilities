@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace BitsNBobs.Manage
 {
@@ -55,6 +56,12 @@ namespace BitsNBobs.Manage
             Disable();
             base.Set(key);
             Enable();
+        }
+
+        public override void Clear()
+        {
+            GameObject.Destroy(Get());
+            base.Clear();
         }
         
     }

@@ -22,7 +22,7 @@ namespace BitsNBobs.Manage
             ChangedState?.Invoke();
         }
 
-        public void Add(K key, T value)
+        public new virtual void Add(K key, T value)
         {
             base.Add(key, value);
         }
@@ -44,6 +44,11 @@ namespace BitsNBobs.Manage
                 Index = this.Count - 1;
             Accessed?.Invoke();
             ChangedState?.Invoke();
+        }
+        
+        public new virtual void Clear()
+        {
+            base.Clear();
         }
         
         public virtual void Set(int index)
