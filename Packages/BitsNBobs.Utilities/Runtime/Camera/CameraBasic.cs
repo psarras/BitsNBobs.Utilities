@@ -51,7 +51,7 @@ using UnityEngine.EventSystems;
         public void OnDrawGizmos()
         {
             Gizmos.color = UnityEngine.Color.red;
-            Gizmos.DrawCube(target, Vector3.one * 2);
+            //Gizmos.DrawCube(target, Vector3.one * 2);
         }
 
         public void Update()
