@@ -1,8 +1,9 @@
 {
     "name": "BitsNBobs.Utilities",
-    "rootNamespace": "",
+    "rootNamespace": "BitsNBobs",
     "references": [
-        ""
+        "",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -2,11 +2,11 @@
 using System.Linq;
 using UnityEngine;
 
-namespace NavigationExperiment.BitsNBobs.Settings
+namespace BitsNBobs.Settings
 {
     public class ResolutionManager : MonoBehaviour
     {
-        private Vector2Int[] resolutions;
+        public Vector2Int[] resolutions;
         private int id = 0;
 
         private void Awake()
@@ -14,15 +14,15 @@ namespace NavigationExperiment.BitsNBobs.Settings
             resolutions = Screen.resolutions.Select(x => new Vector2Int(x.width, x.height)).ToArray();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                var resolution = resolutions[id];
-                Debug.Log($"Changing resolution: {resolution}");
-                Screen.SetResolution(resolution.x, resolution.y, FullScreenMode.Windowed);
-                id = (id + 1 + resolutions.Length) % resolutions.Length;
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.R))
+        //     {
+        //         var resolution = resolutions[id];
+        //         Debug.Log($"Changing resolution: {resolution}");
+        //         Screen.SetResolution(resolution.x, resolution.y, FullScreenMode.Windowed);
+        //         id = (id + 1 + resolutions.Length) % resolutions.Length;
+        //     }
+        // }
     }
 }
