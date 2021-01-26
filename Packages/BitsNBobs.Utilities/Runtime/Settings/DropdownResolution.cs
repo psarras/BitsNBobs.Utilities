@@ -20,6 +20,8 @@ namespace DesignReview
         {
             dropdown = GetComponent<TMP_Dropdown>();
             resolutions = Screen.resolutions;
+            Screen.fullScreen = false;
+            Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
         }
 
         void Start()
@@ -38,11 +40,6 @@ namespace DesignReview
         {
             var resolution = resolutions[index];
             Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.MaximizedWindow);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
         }
     }
 }
