@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BitsNBobs.Settings;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,22 +16,26 @@ namespace DesignReview
         private TMP_Dropdown dropdown;
 
         private Resolution[] resolutions;
+
+        private HashSet<(int, int)> resolutionUnique;
         // Start is called before the first frame update
         void Awake()
         {
+            resolutionUnique = new HashSet<(int, int)>();
             dropdown = GetComponent<TMP_Dropdown>();
             resolutions = Screen.resolutions;
-            Screen.fullScreen = false;
-            Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+            //Screen.fullScreen = false;
+            //Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
         }
 
         void Start()
         {
             dropdown.options.Clear();
-
-            foreach (var resolution in resolutions)
+            
+            resolutions.ToList().ForEach(x => resolutionUnique.Add((x.width, x.height)));
+            foreach (var resolution in resolutionUnique)
             {
-                dropdown.options.Add(new TMP_Dropdown.OptionData($"{resolution.width} x {resolution.height}, {resolution.refreshRate}Hz"));
+                dropdown.options.Add(new TMP_Dropdown.OptionData($"{resolution.Item1} x {resolution.Item2}"));
             }
 
             dropdown.onValueChanged.AddListener(ChangeResolution);
@@ -38,8 +43,8 @@ namespace DesignReview
 
         private void ChangeResolution(int index)
         {
-            var resolution = resolutions[index];
-            Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.MaximizedWindow);
+            var resolution = resolutionUnique.ToList()[index];
+            Screen.SetResolution(resolution.Item1, resolution.Item2, FullScreenMode.Windowed);
         }
     }
 }
