@@ -19,13 +19,13 @@ namespace BitsNBobs.Patterns.Factory
             return true;
         }
 
-        public static bool CreateInputs(IContext context, out IObject<O> guiConstructor)
+        private static bool CreateInputs(IContext context, out IObject<O> guiConstructor)
         {
             guiConstructor = null;
             if (Constructors == null)
                 InstantiateConstructors();
 
-            var type = context.Type; //.GetType();
+            var type = context.Type;
             var matchingType = Constructors.Keys.Where(x => x.IsAssignableFrom(type)).FirstOrDefault();
             if (matchingType == null) return false;
             guiConstructor = Constructors[matchingType];
