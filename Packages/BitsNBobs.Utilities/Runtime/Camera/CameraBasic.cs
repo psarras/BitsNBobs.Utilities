@@ -200,7 +200,7 @@ using UnityEngine.EventSystems;
                 distance = Vector3.Distance(target, transform.position);
             }
         }
-
+        
         private void UpdateTowards()
         {
             RaycastHit raycastHit;
@@ -266,5 +266,18 @@ using UnityEngine.EventSystems;
             distance = cameraBasic.distance;
             desiredRotation = cameraBasic.desiredRotation;
         }
+
+        public void SetCamera(Vector3 pos, Vector3 dir, Vector3 up)
+        {
+            transform.position = pos;
+            target = pos;
+            distance = 0;
+            var quaternion = Quaternion.identity;
+            quaternion.SetLookRotation(dir, up);
+            transform.rotation = quaternion;
+            UpdateTowards();
+            StopMovement();
+        }
+        
     }
 }
