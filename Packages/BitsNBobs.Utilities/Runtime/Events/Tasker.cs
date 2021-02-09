@@ -22,6 +22,7 @@ namespace BitsNBobs.Events
 
         public IEnumerator UpdateRoutine()
         {
+            Debug.LogWarning("Tasker Start");
             while (true)
             {
                 if (!update)
@@ -34,6 +35,7 @@ namespace BitsNBobs.Events
                 update = false;
                 yield return new WaitForSeconds(repeatRate);
             }
+            Debug.LogError("Tasker Stopped");
         }
     }
 }

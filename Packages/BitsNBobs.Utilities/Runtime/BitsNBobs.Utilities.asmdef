@@ -3,7 +3,8 @@
     "rootNamespace": "BitsNBobs",
     "references": [
         "",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "NaughtyAttributes.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
