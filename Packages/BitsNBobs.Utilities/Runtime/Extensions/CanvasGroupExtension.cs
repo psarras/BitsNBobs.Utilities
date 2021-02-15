@@ -27,5 +27,13 @@ namespace BitsNBobs.Extensions
                 canvasGroup.blocksRaycasts = true;
         }
         
+        public static void SetVisibility(this CanvasGroup canvasGroup, bool state)
+        {
+            if (state)
+                canvasGroup.TurnOn();
+            else
+                canvasGroup.TurnOff();
+        }
+        
     }
 }

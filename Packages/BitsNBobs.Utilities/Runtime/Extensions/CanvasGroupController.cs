@@ -42,7 +42,7 @@ namespace BitsNBobs.Extensions
             else
                 TurnOff();
         }
-        
+
         [Button()]
         public void StateToggle()
         {
