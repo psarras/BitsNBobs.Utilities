@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using NaughtyAttributes;
+//using NaughtyAttributes;
 using UnityEngine;
 
 namespace BitsNBobs.Extensions
@@ -43,7 +43,9 @@ namespace BitsNBobs.Extensions
                 TurnOff();
         }
 
-        [Button()]
+// #if UNITY_EDITOR
+//         [Button()]
+// #endif
         public void StateToggle()
         {
             if (canvasGroup == null)
