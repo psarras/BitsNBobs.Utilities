@@ -1,16 +1,21 @@
 {
-  "name": "stam.bitsnbobs.utilities",
-  "displayName": "Bits n Bobs: Utilities",
+  "name": "com.spsarras.bitsnbobs",
+  "displayName": "Bits n Bobs",
   "version": "1.0.1",
   "unity": "2020.1",
   "keywords": [
-    "utilities"
+    "utility",
+    "unity",
+    "pattern"
   ],
   "description": "A few useful scripts I picked-up along my journey in Unity",
   "author": {
-    "name": "Stamatios Psarras",
-    "url": "http://github.com"
+    "name": "Stam",
+    "url": "https://github.com/psarras"
   },
-  "type": "library",
-  "hideInEditor": false
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:psarras/BitsNBobs.Utilities.git"
+ },
+  "license": "MIT"
 }
