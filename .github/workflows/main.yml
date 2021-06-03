@@ -41,7 +41,7 @@ jobs:
           $fileContent = (Get-Content $filePath)
           echo $fileContent
           $replacedFileContent = $fileContent
-          $replacedFileContent = $replacedFileContent.Replace('"0.0.0"', $env:NUMERICAL_VERSION)
+          $replacedFileContent = $replacedFileContent.Replace('"0.0.0"', ('"' + $env:NUMERICAL_VERSION + '"'))
           echo $replacedFileContent
           Out-File -FilePath $filePath -InputObject $replacedFileContent
         working-directory: Packages/BitsNBobs.Utilities
