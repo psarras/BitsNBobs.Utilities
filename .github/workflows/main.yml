@@ -17,16 +17,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-          working-directory: ./BitsNBobs.Utilities/BitsNBobs.Utilities/Packages/BitsNBobs.Utilities     
       - run: npm install
       - run: |
-          ls
           cd Packages/BitsNBobs.Utilities
-          ls
           npm test
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: ./BitsNBobs.Utilities/Packages/BitsNBobs.Utilities/package.json
+          package: Packages/BitsNBobs.Utilities/package.json
           dry-run: true
-          working-directory: ./BitsNBobs.Utilities/BitsNBobs.Utilities/Packages/BitsNBobs.Utilities     
