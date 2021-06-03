@@ -8,8 +8,8 @@ namespace BitsNBobs.Events
     {
         private bool update = false;
         public float repeatRate { get; set; } = 0.1f;
-        public Action AnyAction { get; set; }
-
+        public virtual Action AnyAction { get; set; }
+        public Coroutine coroutine { get; private set; }
         public void Update()
         {
             update = true;
@@ -17,7 +17,8 @@ namespace BitsNBobs.Events
 
         public Coroutine StartWatching(MonoBehaviour handler)
         {
-            return handler.StartCoroutine(UpdateRoutine());
+            coroutine = handler.StartCoroutine(UpdateRoutine());
+            return coroutine;
         }
 
         public IEnumerator UpdateRoutine()

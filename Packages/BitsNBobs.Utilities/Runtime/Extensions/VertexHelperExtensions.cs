@@ -122,7 +122,8 @@ namespace BitsNBobs.Extensions
             var vert = UIVertex.simpleVert;
             vert.color = color;
             var startVertex = vh.currentVertCount;
-
+            if (positions.Length <= 1)
+                return;
             var dir = positions[1] - positions[0];
             var prevDir = new Vector3(dir.x, dir.y, dir.z);
             var halfThickness = thickness / 2;
