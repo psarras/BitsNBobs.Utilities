@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using NaughtyAttributes;
@@ -11,13 +12,16 @@ namespace BitsNBobs.Extensions
         [SerializeField] private bool interaction;
         [SerializeField] private bool blocksRays;
         [SerializeField] private bool visibility;
-        
+
+        public event Action<bool> OnStateChange;
+        public bool CurrentState { get; private set; }
         private CanvasGroup canvasGroup;
         
         // Start is called before the first frame update
         void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+            CurrentState = canvasGroup.alpha == 1;
         }
 
         public void TurnOn()
@@ -25,6 +29,8 @@ namespace BitsNBobs.Extensions
             if (canvasGroup == null)
                 canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.TurnOn(visibility, interaction, blocksRays);
+            CurrentState = true;
+            OnStateChange?.Invoke(true);
         }
         
         
@@ -33,6 +39,8 @@ namespace BitsNBobs.Extensions
             if (canvasGroup == null)
                 canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.TurnOff(visibility, interaction, blocksRays);
+            CurrentState = false;
+            OnStateChange?.Invoke(false);
         }
 
         public void State(bool state)
