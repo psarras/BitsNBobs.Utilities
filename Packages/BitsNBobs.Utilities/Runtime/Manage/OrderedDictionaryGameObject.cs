@@ -4,7 +4,7 @@ using UnityEngine.PlayerLoop;
 
 namespace BitsNBobs.Manage
 {
-    public class OrderedDictionaryGameObject : OrderedDictionaryManager<string, GameObject>
+    public class OrderedDictionaryGameObject : OrderedDictionaryManager<string, GoWrapper>
     {
         public virtual void Enable()
         {
@@ -26,7 +26,7 @@ namespace BitsNBobs.Manage
 
         public override void Remove()
         {
-            UnityEngine.Object.Destroy(Get());
+            UnityEngine.Object.Destroy(Get().GetGo());
             base.Remove();
         }
 
@@ -60,7 +60,7 @@ namespace BitsNBobs.Manage
 
         public override void Clear()
         {
-            GameObject.Destroy(Get());
+            GameObject.Destroy(Get().GetGo());
             base.Clear();
         }
         

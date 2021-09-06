@@ -99,7 +99,10 @@ namespace BitsNBobs.Manage
         public T Get(int index)
         {
             var o = this[GetKey(index)];
-            return (T)o;
+            var t2 = o.GetType();
+            var casted = (T)o;
+            var t = casted.GetType();
+            return casted;
         }
 
         public T Get(K key)
