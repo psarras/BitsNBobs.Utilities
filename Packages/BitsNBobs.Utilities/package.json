@@ -17,5 +17,9 @@
     "type": "git",
     "url": "git@github.com:psarras/BitsNBobs.Utilities.git"
  },
+  "dependencies": {
+    "com.unity.modules.jsonserialize": "1.0.0"
+  },
+  
   "license": "MIT"
 }
