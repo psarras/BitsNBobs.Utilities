@@ -1,12 +1,12 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
-    using Color = System.Drawing.Color;
+using Color = System.Drawing.Color;
 
-    namespace BitsNBobs.Cameras
+namespace BitsNBobs.Cameras
 {
     public class CameraBasic : MonoBehaviour
     {
@@ -277,6 +277,33 @@ using UnityEngine.EventSystems;
             transform.rotation = quaternion;
             UpdateTowards();
             StopMovement();
+        }
+
+        public void SetCamera(List<GameObject> withinView)
+        {
+            var bounds = CameraBasic.GetBoundFromGos(withinView);
+            var pos = bounds.center + bounds.size;
+            SetCamera(pos, -bounds.size, Vector3.up);
+        }
+        
+        public static Bounds GetBoundFromGos(List<GameObject> gameObjects)
+        {
+            var bounds = new Bounds();
+            var renderers = gameObjects
+                .SelectMany(x => x.GetComponentsInChildren<Renderer>())
+                .Where(x => x != null)
+                .ToArray();
+
+            for (var i = 0; i < renderers.Length; i++)
+            {
+                var r = renderers[i];
+                if (i == 0)
+                    bounds = new Bounds(r.bounds.center, r.bounds.size);
+                else
+                    bounds.Encapsulate(r.bounds);
+            }
+
+            return bounds;
         }
         
     }
