@@ -51,7 +51,7 @@ namespace BitsNBobs.Cameras
         public void OnDrawGizmos()
         {
             Gizmos.color = UnityEngine.Color.red;
-            //Gizmos.DrawCube(target, Vector3.one * 2);
+            Gizmos.DrawCube(target, Vector3.one * 5);
         }
 
         public void Update()
@@ -204,15 +204,22 @@ namespace BitsNBobs.Cameras
         private void UpdateTowards()
         {
             RaycastHit raycastHit;
-            if (Physics.Raycast(new Ray(transform.position, transform.forward), out raycastHit))
+            var ray = new Ray(transform.position, transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * 10000, UnityEngine.Color.blue, 30);
+            if (Physics.Raycast(ray, out raycastHit))
             {
                 target = raycastHit.point;
                 distance = Vector3.Distance(target, transform.position);
             }
             else
             {
-                target = transform.position + transform.forward * distance;
+                UpdatedTargetBasedOnDistance();
             }
+        }
+
+        private void UpdatedTargetBasedOnDistance()
+        {
+            target = transform.position + transform.forward * distance;
         }
 
         public void StopMovement()
@@ -284,14 +291,16 @@ namespace BitsNBobs.Cameras
             var bounds = CameraBasic.GetBoundFromGos(withinView);
             var pos = bounds.center + bounds.size;
             SetCamera(pos, -bounds.size, Vector3.up);
+            distance = Vector3.Distance(pos, bounds.center);
+            UpdatedTargetBasedOnDistance();
         }
         
-        public static Bounds GetBoundFromGos(List<GameObject> gameObjects)
+        public static Bounds GetBoundFromGos(List<GameObject> gameObjects, bool excludeHuge = true)
         {
             var bounds = new Bounds();
             var renderers = gameObjects
                 .SelectMany(x => x.GetComponentsInChildren<Renderer>())
-                .Where(x => x != null)
+                .Where(x => x != null && x.bounds.size.magnitude < 10000)
                 .ToArray();
 
             for (var i = 0; i < renderers.Length; i++)
